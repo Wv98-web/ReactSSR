@@ -10,6 +10,8 @@ import { render } from "./utils";
 // 服务器端渲染
 // React代码在服务器上执行，消耗的是服务器端的性能
 
+// 服务器端渲染只发生在第一次进入页面的时候
+
 const app = express();
 const port = 3000;
 
