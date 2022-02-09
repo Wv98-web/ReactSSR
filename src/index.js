@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
         <title>ReactSSR</title>
       </head>
       <body>
-        ${content}
+        <div id="root">${content}</div>
         <script src="/index.js"></script>
       </body>
     </html>
