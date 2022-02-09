@@ -14,6 +14,9 @@ import { renderToString } from "react-dom/server";
 
 const app = express();
 const port = 3000;
+
+app.use(express.static("public")); // 请求静态文件，就到根目录找
+
 const content = renderToString(<Home />);
 
 app.get("/", (req, res) => {
@@ -24,6 +27,7 @@ app.get("/", (req, res) => {
       </head>
       <body>
         ${content}
+        <script src="/index.js"></script>
       </body>
     </html>
   `);
