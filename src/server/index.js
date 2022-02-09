@@ -1,7 +1,5 @@
-const express = require("express");
-import Home from "../containers/Home/index";
-import React from "react";
-import { renderToString } from "react-dom/server";
+import express from "express";
+import { render } from "./utils";
 
 // 虚拟Dom是真实DOM的一个javascript对象映射 提升页面渲染性能
 // 服务器渲染ssr 首屏速度加快，seo效果提升
@@ -17,20 +15,8 @@ const port = 3000;
 
 app.use(express.static("public")); // 请求静态文件，就到根目录找
 
-const content = renderToString(<Home />);
-
-app.get("/", (req, res) => {
-	res.send(`
-    <html>
-      <head>
-        <title>ReactSSR</title>
-      </head>
-      <body>
-        <div id="root">${content}</div>
-        <script src="/index.js"></script>
-      </body>
-    </html>
-  `);
+app.get("*", function (req, res) {
+	res.send(render(req));
 });
 
 app.listen(port, () => {
