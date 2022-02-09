@@ -1,5 +1,5 @@
 const express = require("express");
-import Home from "./containers/Home/index";
+import Home from "../containers/Home/index";
 import React from "react";
 import { renderToString } from "react-dom/server";
 
