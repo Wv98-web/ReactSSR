@@ -4,11 +4,45 @@ import { connect } from "react-redux";
 import { getHomeList } from "./store/actions";
 
 class Home extends Component {
+	constructor(props) {
+		super(props);
+	}
+
+	/**
+	 * 列表获取流程
+	 * localhost:3000
+	 * 服务器接收到请求，这时store是空的
+	 * 服务器端不会执行componentDidMount，所以列表获取不到
+	 *
+	 * 客户端代码运行，store依然是空的
+	 * 客户端执行服务器端不会执行componentDidMount，列表数据被获取
+	 * store中的链表数据被更新
+	 * 客户端渲染出store中list数据对应列表内容
+	 *
+	 * 如何让服务器端也执行componentDidMount
+	 */
+
+	componentDidMount() {
+		// componentDidMount只会在客户端渲染执行，在服务端不执行
+		this.props.getHomeList();
+	}
+
+	getList() {
+		const { list } = this.props;
+		return list.map((item) => {
+			return <div key={item.id}>{item.uname}</div>;
+		});
+	}
+
 	render() {
 		return (
 			<div>
 				<Header />
+
 				<div>My name is {this.props.name}</div>
+
+				{this.getList()}
+
 				<button
 					onClick={() => {
 						alert("click");
@@ -19,14 +53,11 @@ class Home extends Component {
 			</div>
 		);
 	}
-
-	componentDidMount() {
-		this.props.getHomeList();
-	}
 }
 
 const mapStateToProps = (state) => ({
 	name: state.home.name,
+	list: state.home.newsList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
