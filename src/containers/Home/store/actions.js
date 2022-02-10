@@ -1,5 +1,7 @@
 import axios from "axios";
 import { CHANGE_LIST } from "./constants";
+import clientAxios from "../../../client/request";
+import serverAxios from "../../../server/request";
 
 const changeList = (list) => ({
 	type: CHANGE_LIST,
@@ -34,15 +36,17 @@ export const getHomeList = (server) => {
 	// 浏览器运行 api/productlist.php = localhost:3000/api/productlist.php
 	// 服务器运行 /api/productlist.php = 服务器根目录下/api/productlist.php
 
-	let homeListApi = "";
-	if (server) {
-		homeListApi = "http://jx.xuzhixiang.top/ap/api/productlist.php";
-	} else {
-		homeListApi = "/api/productlist.php";
-	}
+	// let homeListApi = "";
+	// if (server) {
+	// 	homeListApi = "http://jx.xuzhixiang.top/ap/api/productlist.php";
+	// } else {
+	// 	homeListApi = "/api/productlist.php";
+	// }
+
+	const request = server ? serverAxios : clientAxios;
 
 	return (dispatch) => {
-		return axios.get(homeListApi).then((res) => {
+		return request.get("/api/productlist.php").then((res) => {
 			const list = res.data.data;
 			dispatch(changeList(list));
 		});

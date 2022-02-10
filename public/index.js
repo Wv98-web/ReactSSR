@@ -1507,6 +1507,18 @@ eval("\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i 
 
 /***/ }),
 
+/***/ "./src/client/request.js":
+/*!*******************************!*\
+  !*** ./src/client/request.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nvar _axios2 = _interopRequireDefault(_axios);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar instance = _axios2.default.create({\n\tbaseURL: \"/\"\n});\n\nexports.default = instance;\n\n//# sourceURL=webpack:///./src/client/request.js?");
+
+/***/ }),
+
 /***/ "./src/components/Header.js":
 /*!**********************************!*\
   !*** ./src/components/Header.js ***!
@@ -1539,7 +1551,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.getHomeList = undefined;\n\nvar _axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nvar _axios2 = _interopRequireDefault(_axios);\n\nvar _constants = __webpack_require__(/*! ./constants */ \"./src/containers/Home/store/constants.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar changeList = function changeList(list) {\n\treturn {\n\t\ttype: _constants.CHANGE_LIST,\n\t\tlist: list\n\t};\n};\n\nvar news = [{\n\tid: \"1\",\n\tuname: \"user1\",\n\tpsw: \"1111\"\n}, {\n\tid: \"2\",\n\tuname: \"user2\",\n\tpsw: \"2222\"\n}, {\n\tid: \"3\",\n\tuname: \"user3\",\n\tpsw: \"3333\"\n}, {\n\tid: \"4\",\n\tuname: \"user4\",\n\tpsw: \"4444\"\n}];\n\nvar getHomeList = exports.getHomeList = function getHomeList(server) {\n\t// http://jx.xuzhixiang.top/ap/api/productlist.php\n\t// 浏览器运行 api/productlist.php = localhost:3000/api/productlist.php\n\t// 服务器运行 /api/productlist.php = 服务器根目录下/api/productlist.php\n\n\tvar homeListApi = \"\";\n\tif (server) {\n\t\thomeListApi = \"http://jx.xuzhixiang.top/ap/api/productlist.php\";\n\t} else {\n\t\thomeListApi = \"/api/productlist.php\";\n\t}\n\n\treturn function (dispatch) {\n\t\treturn _axios2.default.get(homeListApi).then(function (res) {\n\t\t\tvar list = res.data.data;\n\t\t\tdispatch(changeList(list));\n\t\t});\n\t};\n};\n\n//# sourceURL=webpack:///./src/containers/Home/store/actions.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.getHomeList = undefined;\n\nvar _axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nvar _axios2 = _interopRequireDefault(_axios);\n\nvar _constants = __webpack_require__(/*! ./constants */ \"./src/containers/Home/store/constants.js\");\n\nvar _request = __webpack_require__(/*! ../../../client/request */ \"./src/client/request.js\");\n\nvar _request2 = _interopRequireDefault(_request);\n\nvar _request3 = __webpack_require__(/*! ../../../server/request */ \"./src/server/request.js\");\n\nvar _request4 = _interopRequireDefault(_request3);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar changeList = function changeList(list) {\n\treturn {\n\t\ttype: _constants.CHANGE_LIST,\n\t\tlist: list\n\t};\n};\n\nvar news = [{\n\tid: \"1\",\n\tuname: \"user1\",\n\tpsw: \"1111\"\n}, {\n\tid: \"2\",\n\tuname: \"user2\",\n\tpsw: \"2222\"\n}, {\n\tid: \"3\",\n\tuname: \"user3\",\n\tpsw: \"3333\"\n}, {\n\tid: \"4\",\n\tuname: \"user4\",\n\tpsw: \"4444\"\n}];\n\nvar getHomeList = exports.getHomeList = function getHomeList(server) {\n\t// http://jx.xuzhixiang.top/ap/api/productlist.php\n\t// 浏览器运行 api/productlist.php = localhost:3000/api/productlist.php\n\t// 服务器运行 /api/productlist.php = 服务器根目录下/api/productlist.php\n\n\t// let homeListApi = \"\";\n\t// if (server) {\n\t// \thomeListApi = \"http://jx.xuzhixiang.top/ap/api/productlist.php\";\n\t// } else {\n\t// \thomeListApi = \"/api/productlist.php\";\n\t// }\n\n\tvar request = server ? _request4.default : _request2.default;\n\n\treturn function (dispatch) {\n\t\treturn request.get(\"/api/productlist.php\").then(function (res) {\n\t\t\tvar list = res.data.data;\n\t\t\tdispatch(changeList(list));\n\t\t});\n\t};\n};\n\n//# sourceURL=webpack:///./src/containers/Home/store/actions.js?");
 
 /***/ }),
 
@@ -1588,6 +1600,18 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n
 
 "use strict";
 eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Header = __webpack_require__(/*! ../../components/Header */ \"./src/components/Header.js\");\n\nvar _Header2 = _interopRequireDefault(_Header);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Login = function Login() {\n\treturn _react2.default.createElement(\n\t\t\"div\",\n\t\tnull,\n\t\t_react2.default.createElement(_Header2.default, null),\n\t\t_react2.default.createElement(\n\t\t\t\"div\",\n\t\t\tnull,\n\t\t\t\"Login\"\n\t\t)\n\t);\n};\n\nexports.default = Login;\n\n//# sourceURL=webpack:///./src/containers/Login/index.js?");
+
+/***/ }),
+
+/***/ "./src/server/request.js":
+/*!*******************************!*\
+  !*** ./src/server/request.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nvar _axios2 = _interopRequireDefault(_axios);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar instance = _axios2.default.create({\n\tbaseURL: \"http://jx.xuzhixiang.top/ap\"\n});\n\nexports.default = instance;\n\n//# sourceURL=webpack:///./src/server/request.js?");
 
 /***/ }),
 
