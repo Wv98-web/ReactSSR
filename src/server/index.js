@@ -3,6 +3,7 @@ import { render } from "./utils";
 import { getStore } from "../store";
 import { matchRoutes } from "react-router-config";
 import routes from "../Routes";
+import proxy from "express-http-proxy";
 
 // 虚拟Dom是真实DOM的一个javascript对象映射 提升页面渲染性能
 // 服务器渲染ssr 首屏速度加快，seo效果提升
@@ -20,12 +21,28 @@ const port = 3000;
 
 app.use(express.static("public")); // 请求静态文件，就到根目录找
 
+// 使用proxy代理，让中间层获取数据
+// /api/productlist.php
+// req.url = productlist.php
+// proxyReqPathResolver: /ap/api/productlist.php
+// http://jx.xuzhixiang.top + proxyReqPathResolver()
+// http://jx.xuzhixiang.top/ap/api/productlist.php
+app.use(
+	"/api",
+	proxy("http://jx.xuzhixiang.top", {
+		proxyReqPathResolver: function (req) {
+			console.log(req.url);
+			return "/ap/api" + req.url;
+		},
+	})
+);
+
 app.get("*", function (req, res) {
 	const store = getStore();
 
 	// 在这里拿到异步数据，并填充到store之中
 	// 根据路由的路径，来往store里面加数据
-	const matchedRoutes = matchRoutes(routes, req.path);
+	/* const matchedRoutes = matchRoutes(routes, req.path);
 	// 让matchedRoutes里面所有的组件，对应的loadData方法执行一次
 	const promise = [];
 	matchedRoutes.forEach((item) => {
@@ -38,7 +55,9 @@ app.get("*", function (req, res) {
 
 	Promise.all(promise).then(() => {
 		res.send(render(store, routes, req));
-	});
+	}); */
+
+	res.send(render(store, routes, req));
 });
 
 app.listen(port, () => {

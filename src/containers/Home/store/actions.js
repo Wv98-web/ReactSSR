@@ -31,12 +31,9 @@ var news = [
 
 export const getHomeList = () => {
 	return (dispatch) => {
-		return axios.get("http://jx.xuzhixiang.top/ap/api/productlist.php").then((res) => {
+		return axios.get("/api/productlist.php").then((res) => {
 			const list = res.data.data;
 			dispatch(changeList(list));
 		});
-		// const list = news;
-		// console.log(list);
-		// return dispatch(changeList(list));
 	};
 };
