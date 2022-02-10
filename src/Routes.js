@@ -9,6 +9,12 @@ export default [
 		exact: true,
 		component: Home,
 		loadData: Home.loadData,
+		routes: [
+			{
+				path: "/ttt",
+				component: Login,
+			},
+		],
 	},
 	{
 		path: "/login",
