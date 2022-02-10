@@ -31,12 +31,12 @@ var news = [
 
 export const getHomeList = () => {
 	return (dispatch) => {
-		// axios.get("http://47.95.113.63/ssr/api/news.json?secret=PP87ANTIPIRATE").then((res) => {
-		// const list = res.data.data;
-		// dispatch(changeList(list));
-		// });
-		const list = news;
-		console.log(list);
-		dispatch(changeList(list));
+		return axios.get("http://jx.xuzhixiang.top/ap/api/productlist.php").then((res) => {
+			const list = res.data.data;
+			dispatch(changeList(list));
+		});
+		// const list = news;
+		// console.log(list);
+		// return dispatch(changeList(list));
 	};
 };

@@ -4,10 +4,6 @@ import { connect } from "react-redux";
 import { getHomeList } from "./store/actions";
 
 class Home extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	/**
 	 * 列表获取流程
 	 * localhost:3000
@@ -30,7 +26,7 @@ class Home extends Component {
 	getList() {
 		const { list } = this.props;
 		return list.map((item) => {
-			return <div key={item.id}>{item.uname}</div>;
+			return <div key={item.pid}>{item.pid}</div>;
 		});
 	}
 
@@ -55,9 +51,10 @@ class Home extends Component {
 	}
 }
 
-Home.loadData = () => {
+Home.loadData = (store) => {
 	// 这个函数，负责在服务器端渲染之前，把这个路由需要书的数据提前加载好
 	// store需要填充什么 需要结合当前用户请求地址和路由，做填充
+	return store.dispatch(getHomeList());
 };
 
 const mapStateToProps = (state) => ({

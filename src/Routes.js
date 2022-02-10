@@ -1,5 +1,3 @@
-import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
 import Home from "./containers/Home";
 import Login from "./containers/Login";
 
@@ -9,12 +7,6 @@ export default [
 		exact: true,
 		component: Home,
 		loadData: Home.loadData,
-		routes: [
-			{
-				path: "/ttt",
-				component: Login,
-			},
-		],
 	},
 	{
 		path: "/login",
