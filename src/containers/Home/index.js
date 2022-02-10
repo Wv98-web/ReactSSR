@@ -55,6 +55,11 @@ class Home extends Component {
 	}
 }
 
+Home.loadData = () => {
+	// 这个函数，负责在服务器端渲染之前，把这个路由需要书的数据提前加载好
+	// store需要填充什么 需要结合当前用户请求地址和路由，做填充
+};
+
 const mapStateToProps = (state) => ({
 	name: state.home.name,
 	list: state.home.newsList,
