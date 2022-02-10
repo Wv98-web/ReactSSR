@@ -3,10 +3,11 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import routes from "../Routes";
 import { Provider } from "react-redux";
-import getStore from "../store";
+import { getClientStore } from "../store";
+
+const store = getClientStore();
 
 // 同构:一套React代码，在服务器端执行一次，再在客户端再执行一次
-
 /**
  * 实现同构
  * 配置 webpack.client.js
@@ -16,7 +17,7 @@ import getStore from "../store";
 
 const App = () => {
 	return (
-		<Provider store={getStore()}>
+		<Provider store={store}>
 			<BrowserRouter>
 				<Switch>
 					{routes.map((route) => (

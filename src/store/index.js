@@ -9,8 +9,12 @@ const reducer = combineReducers({
 /**
  *  动态获取store，保证每次请求服务器返回不同store
  */
-const getStore = () => {
+export const getStore = () => {
 	return createStore(reducer, applyMiddleware(thunk));
 };
 
-export default getStore;
+export const getClientStore = () => {
+	// 数据的脱水和注水
+	const defaultState = window.context.state;
+	return createStore(reducer, defaultState, applyMiddleware(thunk));
+};
