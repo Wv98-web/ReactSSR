@@ -29,9 +29,20 @@ var news = [
 	},
 ];
 
-export const getHomeList = () => {
+export const getHomeList = (server) => {
+	// http://jx.xuzhixiang.top/ap/api/productlist.php
+	// 浏览器运行 api/productlist.php = localhost:3000/api/productlist.php
+	// 服务器运行 /api/productlist.php = 服务器根目录下/api/productlist.php
+
+	let homeListApi = "";
+	if (server) {
+		homeListApi = "http://jx.xuzhixiang.top/ap/api/productlist.php";
+	} else {
+		homeListApi = "/api/productlist.php";
+	}
+
 	return (dispatch) => {
-		return axios.get("/api/productlist.php").then((res) => {
+		return axios.get(homeListApi).then((res) => {
 			const list = res.data.data;
 			dispatch(changeList(list));
 		});

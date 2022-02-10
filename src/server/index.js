@@ -46,7 +46,7 @@ app.get("*", function (req, res) {
 
 	// 在这里拿到异步数据，并填充到store之中
 	// 根据路由的路径，来往store里面加数据
-	/* const matchedRoutes = matchRoutes(routes, req.path);
+	const matchedRoutes = matchRoutes(routes, req.path);
 	// 让matchedRoutes里面所有的组件，对应的loadData方法执行一次
 	const promise = [];
 	matchedRoutes.forEach((item) => {
@@ -59,9 +59,9 @@ app.get("*", function (req, res) {
 
 	Promise.all(promise).then(() => {
 		res.send(render(store, routes, req));
-	}); */
+	});
 
-	res.send(render(store, routes, req));
+	// res.send(render(store, routes, req));
 });
 
 app.listen(port, () => {

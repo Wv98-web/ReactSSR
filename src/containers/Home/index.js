@@ -22,7 +22,7 @@ class Home extends Component {
 		// componentDidMount只会在客户端渲染执行，在服务端不执行
 
 		if (!this.props.list.length) {
-			this.props.getHomeList();
+			this.props.getHomeList(false);
 		}
 	}
 
@@ -57,7 +57,7 @@ class Home extends Component {
 Home.loadData = (store) => {
 	// 这个函数，负责在服务器端渲染之前，把这个路由需要书的数据提前加载好
 	// store需要填充什么 需要结合当前用户请求地址和路由，做填充
-	return store.dispatch(getHomeList());
+	return store.dispatch(getHomeList(true));
 };
 
 const mapStateToProps = (state) => ({
