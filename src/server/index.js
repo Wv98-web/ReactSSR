@@ -21,12 +21,16 @@ const port = 3000;
 
 app.use(express.static("public")); // 请求静态文件，就到根目录找
 
+// 浏览器 <===> node server(作为中间层) <===> 底层服务器
+
 // 使用proxy代理，让中间层获取数据
 // /api/productlist.php
 // req.url = productlist.php
 // proxyReqPathResolver: /ap/api/productlist.php
 // http://jx.xuzhixiang.top + proxyReqPathResolver()
 // http://jx.xuzhixiang.top/ap/api/productlist.php
+
+// 其他方法 axios中统一对baseUrl做封装
 app.use(
 	"/api",
 	proxy("http://jx.xuzhixiang.top", {
