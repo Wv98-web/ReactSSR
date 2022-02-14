@@ -24,9 +24,11 @@ export const getHomeList = () => {
 	// }
 
 	return (dispatch, getState, axiosInstance) => {
-		return axiosInstance.get("/api/productlist.php").then((res) => {
-			const list = res.data.data;
-			dispatch(changeList(list));
-		});
+		return axiosInstance
+			.post("/api/v1/authorizations?username=zhaoyadan@hidream.net&password=demo123")
+			.then((res) => {
+				const list = res.data;
+				dispatch(changeList(list));
+			});
 	};
 };

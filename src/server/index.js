@@ -32,16 +32,16 @@ app.use(express.static("public")); // 请求静态文件，就到根目录找
 
 // 其他方法 axios中统一对baseUrl做封装
 app.use(
-	"/api",
-	proxy("http://jx.xuzhixiang.top", {
+	"/api/v1",
+	proxy("http://apit.hidream.net", {
 		proxyReqPathResolver: function (req) {
-			return "/ap/api" + req.url;
+			return "/api/v1" + req.url;
 		},
 	})
 );
 
 app.get("*", function (req, res) {
-	const store = getStore();
+	const store = getStore(req);
 
 	// 在这里拿到异步数据，并填充到store之中
 	// 根据路由的路径，来往store里面加数据

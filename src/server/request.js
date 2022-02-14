@@ -1,7 +1,11 @@
 import axios from "axios";
 
-const instance = axios.create({
-	baseURL: "http://jx.xuzhixiang.top/ap",
-});
+const createInstance = (req) =>
+	axios.create({
+		baseURL: "http://apit.hidream.net",
+		headers: {
+			cookie: req.get("cookie") || "",
+		},
+	});
 
-export default instance;
+export default createInstance;

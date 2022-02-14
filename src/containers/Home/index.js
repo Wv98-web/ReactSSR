@@ -19,16 +19,24 @@ class Home extends Component {
 
 	componentDidMount() {
 		// componentDidMount只会在客户端渲染执行，在服务端不执行
-		if (!this.props.list.length) {
-			this.props.getHomeList(false);
-		}
+
+		// if (!this.props.list.length) {
+		// 	this.props.getHomeList(false);
+		// }
+		this.props.getHomeList(false);
 	}
 
 	getList() {
 		const { list } = this.props;
-		return list.map((item) => {
-			return <div key={item.pid}>{item.pid}</div>;
-		});
+		// return list.map((item) => {
+		// 	return <div key={item.pid}>{item.pid}</div>;
+		// });
+
+		return (
+			<div>
+				<p>{list.access_token}</p>
+			</div>
+		);
 	}
 
 	render() {
