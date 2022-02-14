@@ -20,7 +20,6 @@ class Home extends Component {
 
 	componentDidMount() {
 		// componentDidMount只会在客户端渲染执行，在服务端不执行
-
 		if (!this.props.list.length) {
 			this.props.getHomeList(false);
 		}

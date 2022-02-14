@@ -1,37 +1,17 @@
-import axios from "axios";
 import { CHANGE_LIST } from "./constants";
-import clientAxios from "../../../client/request";
-import serverAxios from "../../../server/request";
 
 const changeList = (list) => ({
 	type: CHANGE_LIST,
 	list,
 });
 
-var news = [
-	{
-		id: "1",
-		uname: "user1",
-		psw: "1111",
-	},
-	{
-		id: "2",
-		uname: "user2",
-		psw: "2222",
-	},
-	{
-		id: "3",
-		uname: "user3",
-		psw: "3333",
-	},
-	{
-		id: "4",
-		uname: "user4",
-		psw: "4444",
-	},
-];
-
-export const getHomeList = (server) => {
+/**
+ * 巧用redux-thunk中的withExtraArgument
+ * 请求数据时，接口传入server变量区分服务器还是客户端发的请求
+ * 优化避免server的传递
+ *
+ */
+export const getHomeList = () => {
 	// http://jx.xuzhixiang.top/ap/api/productlist.php
 	// 浏览器运行 api/productlist.php = localhost:3000/api/productlist.php
 	// 服务器运行 /api/productlist.php = 服务器根目录下/api/productlist.php
@@ -43,10 +23,8 @@ export const getHomeList = (server) => {
 	// 	homeListApi = "/api/productlist.php";
 	// }
 
-	const request = server ? serverAxios : clientAxios;
-
-	return (dispatch) => {
-		return request.get("/api/productlist.php").then((res) => {
+	return (dispatch, getState, axiosInstance) => {
+		return axiosInstance.get("/api/productlist.php").then((res) => {
 			const list = res.data.data;
 			dispatch(changeList(list));
 		});
