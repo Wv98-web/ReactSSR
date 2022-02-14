@@ -6,7 +6,6 @@ import { actions } from "./store/index";
 export class Header extends Component {
 	render() {
 		const { login, handleLogin, handleLogout } = this.props;
-		console.log(login, "login");
 
 		return (
 			<div>
@@ -14,6 +13,7 @@ export class Header extends Component {
 				<br />
 				{login ? (
 					<Fragment>
+						<Link to="/list">list</Link>
 						<div onClick={handleLogout}>logout</div>
 					</Fragment>
 				) : (

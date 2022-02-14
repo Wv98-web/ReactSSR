@@ -1,6 +1,6 @@
 import App from "./App";
 import Home from "./containers/Home";
-import Login from "./containers/Login";
+import List from "./containers/List";
 
 // 当加载HOME组件之前，我希望调用home.loadData方法，提前获取到必要的异步请求
 // 然后再做服务器渲染，把页面返回到用户
@@ -17,9 +17,10 @@ export default [
 				loadData: Home.loadData,
 			},
 			{
-				path: "/login",
+				path: "/list",
 				exact: true,
-				component: Login,
+				component: List,
+				loadData: List.loadData,
 			},
 		],
 	},

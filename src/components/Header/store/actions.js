@@ -29,7 +29,6 @@ export const getHeaderInfo = () => {
 			.post("/api/v1/authorizations?username=zhaoyadan@hidream.net&password=demo123")
 			.then((res) => {
 				const isLogin = res.data.access_token ? true : false;
-				console.log(isLogin, "islogin");
 				dispatch(changeLogin(isLogin));
 			});
 	};
