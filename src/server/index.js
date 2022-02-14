@@ -35,7 +35,6 @@ app.use(
 	"/api",
 	proxy("http://jx.xuzhixiang.top", {
 		proxyReqPathResolver: function (req) {
-			console.log(req.url);
 			return "/ap/api" + req.url;
 		},
 	})
@@ -54,8 +53,6 @@ app.get("*", function (req, res) {
 			promise.push(item.route.loadData(store));
 		}
 	});
-
-	console.log(matchedRoutes);
 
 	Promise.all(promise).then(() => {
 		res.send(render(store, routes, req));
