@@ -12,13 +12,13 @@ const app = express();
 const port = 3000;
 
 app.use(express.static("public"));
+
 // 使用proxy代理，让中间层获取数据
 // /api/productlist.php
 // req.url = productlist.php
 // proxyReqPathResolver: /ap/api/productlist.php
 // http://jx.xuzhixiang.top + proxyReqPathResolver()
 // http://jx.xuzhixiang.top/ap/api/productlist.php
-
 // 其他方法 axios中统一对baseUrl做封装
 app.use(
 	"/api/v1",
@@ -32,6 +32,8 @@ app.use(
 app.get("*", function (req, res) {
 	const store = getStore(req);
 
+	res.cookie("isLogin", true);
+
 	// 在这里拿到异步数据，并填充到store之中
 	// 根据路由的路径，来往store里面加数据
 	const matchedRoutes = matchRoutes(routes, req.path);
@@ -44,7 +46,16 @@ app.get("*", function (req, res) {
 	});
 
 	Promise.all(promise).then(() => {
-		res.send(render(store, routes, req));
+		const context = {};
+		const html = render(store, routes, req, context);
+		console.log(context.NOT_FOUND);
+
+		if (context.NOT_FOUND) {
+			res.status(404);
+			res.send(html);
+		} else {
+			res.send(html);
+		}
 	});
 });
 
