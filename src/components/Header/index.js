@@ -10,16 +10,23 @@ export class Header extends Component {
 		const { login, handleLogin, handleLogout } = this.props;
 
 		return (
-			<div className={styles.test}>
-				<Link to="/">Home</Link>
-				<br />
+			<div className={styles.container}>
+				<Link to="/" className={styles.item}>
+					首页
+				</Link>
 				{login ? (
 					<Fragment>
-						<Link to="/list">list</Link>
-						<div onClick={handleLogout}>logout</div>
+						<Link to="/list" className={styles.item}>
+							列表
+						</Link>
+						<div onClick={handleLogout} className={styles.item}>
+							退出
+						</div>
 					</Fragment>
 				) : (
-					<div onClick={handleLogin}>Login</div>
+					<div onClick={handleLogin} className={styles.item}>
+						登录
+					</div>
 				)}
 			</div>
 		);

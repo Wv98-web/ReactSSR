@@ -36,7 +36,7 @@ class Home extends Component {
 
 		return (
 			<div>
-				<div className={styles.test}>
+				<div className={styles.item}>
 					<p>{list.access_token}</p>
 				</div>
 			</div>
@@ -45,18 +45,10 @@ class Home extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className={styles.container}>
 				<div>My name is {this.props.name}</div>
 
 				{this.getList()}
-
-				<button
-					onClick={() => {
-						alert("click");
-					}}
-				>
-					click
-				</button>
 			</div>
 		);
 	}

@@ -12,12 +12,12 @@ class List extends Component {
 
 	getList() {
 		const { list } = this.props;
-		return <div>{list.access_token}</div>;
+		return <div className={styles.item}>{list.access_token}</div>;
 	}
 
 	render() {
 		return this.props.login ? (
-			<div className={styles.test}>
+			<div className={styles.container}>
 				{this.getList()}
 				list
 			</div>

@@ -1,3 +1,10 @@
-.test {
-	background: purple;
+.container {
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.item {
+	overflow: hidden;
+	word-break: break-all;
 }
