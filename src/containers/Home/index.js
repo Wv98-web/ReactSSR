@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { Helmet } from "react-helmet";
 import withStyle from "../../WithStyle";
 import { getHomeList } from "./store/actions";
 import styles from "./style.css";
+import pic from "./崖上的波妞4k.jpg";
 
 class Home extends Component {
 	/**
@@ -35,11 +37,18 @@ class Home extends Component {
 		// });
 
 		return (
-			<div>
+			<Fragment>
+				<Helmet>
+					<title>这是ReactSSR的首页 - ReactSSR</title>
+					<meta
+						name="description"
+						content="从零开始，带你搭建属于自己的React SSR框架，从根本上解决客户端渲染问题 。"
+					></meta>
+				</Helmet>
 				<div className={styles.item}>
 					<p>{list.access_token}</p>
 				</div>
-			</div>
+			</Fragment>
 		);
 	}
 
@@ -47,7 +56,7 @@ class Home extends Component {
 		return (
 			<div className={styles.container}>
 				<div>My name is {this.props.name}</div>
-
+				<img src={pic} alt="" />
 				{this.getList()}
 			</div>
 		);

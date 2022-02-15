@@ -30,6 +30,14 @@ const serverConfig = {
 					},
 				],
 			},
+			{
+				test: /\.(png|jpeg|jpg|gif|svg)?$/,
+				loader: "url-loader",
+				options: {
+					limit: 8000,
+					publicPath: "/",
+				},
+			},
 		],
 	},
 };
