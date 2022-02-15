@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getHomeList } from "./store/actions";
+import styles from "./style.css";
 
 class Home extends Component {
 	/**
@@ -34,7 +35,9 @@ class Home extends Component {
 
 		return (
 			<div>
-				<p>{list.access_token}</p>
+				<div className={styles.test}>
+					<p>{list.access_token}</p>
+				</div>
 			</div>
 		);
 	}

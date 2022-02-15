@@ -10,6 +10,25 @@ const clientConfig = {
 		filename: "index.js", // 文件名
 		path: path.resolve(__dirname, "public"), // 存放在根目录为build的文件夹中
 	},
+	module: {
+		// 规则
+		rules: [
+			{
+				test: /\.css?$/, // 文件类型为css
+				use: [
+					"style-loader",
+					{
+						loader: "css-loader",
+						options: {
+							importLoaders: 1,
+							modules: true,
+							localIdentName: "[name]_[local]_[hash:base64:5]",
+						},
+					},
+				],
+			},
+		],
+	},
 };
 
 module.exports = merge(config, clientConfig);
