@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import withStyle from "../../WithStyle";
 import { getHomeList } from "./store/actions";
 import styles from "./style.css";
 
@@ -25,12 +26,6 @@ class Home extends Component {
 		// 	this.props.getHomeList(false);
 		// }
 		this.props.getHomeList(false);
-	}
-
-	componentWillMount() {
-		if (this.props.staticContext) {
-			this.props.staticContext.css.push(styles._getCss());
-		}
 	}
 
 	getList() {
@@ -67,12 +62,6 @@ class Home extends Component {
 	}
 }
 
-Home.loadData = (store) => {
-	// 这个函数，负责在服务器端渲染之前，把这个路由需要书的数据提前加载好
-	// store需要填充什么 需要结合当前用户请求地址和路由，做填充
-	return store.dispatch(getHomeList(true));
-};
-
 const mapStateToProps = (state) => ({
 	name: state.home.name,
 	list: state.home.newsList,
@@ -84,4 +73,11 @@ const mapDispatchToProps = (dispatch) => ({
 	},
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+const exportHome = connect(mapStateToProps, mapDispatchToProps)(withStyle(Home, styles));
+exportHome.loadData = (store) => {
+	// 这个函数，负责在服务器端渲染之前，把这个路由需要书的数据提前加载好
+	// store需要填充什么 需要结合当前用户请求地址和路由，做填充
+	return store.dispatch(getHomeList(true));
+};
+
+export default exportHome;

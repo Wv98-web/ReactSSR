@@ -25,10 +25,6 @@ class List extends Component {
 	}
 }
 
-List.loadData = (store) => {
-	return store.dispatch(getList());
-};
-
 const mapStateToProps = (state) => ({
 	list: state.list.List,
 	login: state.header.login,
@@ -40,4 +36,9 @@ const mapDispatchToProps = (dispatch) => ({
 	},
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+const exportList = connect(mapStateToProps, mapDispatchToProps)(List);
+exportList.loadData = (store) => {
+	return store.dispatch(getList());
+};
+
+export default exportList;
