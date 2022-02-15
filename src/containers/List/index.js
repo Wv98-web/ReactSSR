@@ -10,7 +10,6 @@ class List extends Component {
 
 	getList() {
 		const { list } = this.props;
-		console.log(list, "list");
 		return <div>{list.access_token}</div>;
 	}
 
