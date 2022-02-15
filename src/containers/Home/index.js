@@ -27,6 +27,12 @@ class Home extends Component {
 		this.props.getHomeList(false);
 	}
 
+	componentWillMount() {
+		if (this.props.staticContext) {
+			this.props.staticContext.css = styles._getCss();
+		}
+	}
+
 	getList() {
 		const { list } = this.props;
 		// return list.map((item) => {

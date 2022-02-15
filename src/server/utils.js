@@ -13,10 +13,13 @@ export const render = (store, routes, req, context) => {
 		</Provider>
 	);
 
+	const cssStr = context.css ? context.css : "";
+
 	return `
       <html>
         <head>
           <title>ReactSSR</title>
+					<style>${cssStr}</style>
         </head>
         <body>
           <div id="root">${content}</div>
