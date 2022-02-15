@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import withStyle from "../../WithStyle";
 import { getList } from "./store/actions";
+import styles from "./style.css";
 
 class List extends Component {
 	componentDidMount() {
@@ -15,7 +17,7 @@ class List extends Component {
 
 	render() {
 		return this.props.login ? (
-			<div>
+			<div className={styles.test}>
 				{this.getList()}
 				list
 			</div>
@@ -36,7 +38,7 @@ const mapDispatchToProps = (dispatch) => ({
 	},
 });
 
-const exportList = connect(mapStateToProps, mapDispatchToProps)(List);
+const exportList = connect(mapStateToProps, mapDispatchToProps)(withStyle(List, styles));
 exportList.loadData = (store) => {
 	return store.dispatch(getList());
 };
