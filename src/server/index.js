@@ -58,7 +58,9 @@ app.get("*", function (req, res) {
 	 * 2.接口比较慢， B,C,D组件数据没有加载完成
 	 */
 	Promise.all(promises).then(() => {
-		const context = {};
+		const context = {
+			css: [],
+		};
 		const html = render(store, routes, req, context);
 
 		/**
